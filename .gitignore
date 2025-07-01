@@ -1,0 +1,7 @@
+# Jangan commit file rahasia dan build
+.env*
+node_modules
+.next
+dist
+.DS_Store
+*.log
