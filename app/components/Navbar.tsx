@@ -9,12 +9,13 @@ export default async function Navbar() {
     data: { user },
   } = await supabase.auth.getUser();
 
-  const signOut = async () => {
+  // Fungsi signOut harus menggunakan deklarasi function agar dapat digunakan sebagai server action
+  async function signOut() {
     'use server';
     const supabase = createClient();
     await supabase.auth.signOut();
-    return redirect('/auth/login');
-  };
+    redirect('/auth/login');
+  }
 
   return (
     <nav className="bg-white shadow-md p-4 sticky top-0 z-50">
@@ -29,7 +30,10 @@ export default async function Navbar() {
                 Dashboard
               </Link>
               <form action={signOut}>
-                <button type="submit" className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-md shadow-sm transition duration-300">
+                <button
+                  type="submit"
+                  className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-md shadow-sm transition duration-300"
+                >
                   Logout
                 </button>
               </form>
@@ -39,7 +43,10 @@ export default async function Navbar() {
               <Link href="/auth/login" className="text-gray-600 hover:text-blue-600">
                 Login
               </Link>
-              <Link href="/auth/register" className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md shadow-sm transition duration-300">
+              <Link
+                href="/auth/register"
+                className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md shadow-sm transition duration-300"
+              >
                 Register
               </Link>
             </>
@@ -48,5 +55,4 @@ export default async function Navbar() {
       </div>
     </nav>
   );
-}
-
+              }
